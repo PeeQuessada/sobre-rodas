@@ -22,6 +22,4 @@ jobs:
     - name: Firebase deploy
       run: |
         sudo npm install -g firebase-tools
-        sudo firebase use main --token ${{ secrets.FIREBASE_TOKEN }}
-        sudo firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
         echo "Hello ${{ github.event.inputs.name }}"
