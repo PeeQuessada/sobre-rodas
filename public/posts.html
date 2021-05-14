@@ -17,7 +17,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body onload="init();">
   <div class="d-flex justify-content-center"> 
     <div class="bg-image" style="background-image: url('./images/inicio.jpg'); height: 320px; display: inline-block;">
       <nav class="navbar navbar-expand-sm navbar-light ">
@@ -66,8 +66,35 @@
     </h1>
   </div>
 
+  <div id="posts">
 
+  </div>
 
 </body>
+
+<script type="text/javascript">
+    const url = "https://sobre-rodas-api-6mt6xtwj7q-rj.a.run.app/list";
+    const cep = document.querySelector("#posts");
+
+    function init() {
+        console.log("init");
+
+        fetch(url, {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'default'
+        })
+        .then(response =>{ response.json()
+            .then( data => showPosts(data))
+        })
+        .catch(error => {
+            console.log("error", error);
+        });
+    }
+
+    function showPosts(response) {
+        console.log("response", response);
+    }
+</script>
 
 </html>
