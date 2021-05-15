@@ -13,6 +13,8 @@
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+  <script src="https://apis.google.com/js/client.js"></script>
+
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
@@ -74,26 +76,41 @@
 
 <script type="text/javascript">
     const url = "https://sobre-rodas-api-6mt6xtwj7q-rj.a.run.app/list";
-    const cep = document.querySelector("#posts");
+    let posts = [];
 
     function init() {
         console.log("init");
 
-        fetch(url, {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'default'
-        })
-        .then(response =>{ response.json()
-            .then( data => showPosts(data))
-        })
-        .catch(error => {
+        let headers = new Headers();
+
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Origin', 'https://sobre-rodas-cd54d.web.app/');
+
+        headers.append('Access-Control-Allow-Origin', 'https://sobre-rodas-cd54d.web.app/');
+        headers.append('Access-Control-Allow-Credentials', 'true');
+
+        
+
+        //headers.append('GET');
+
+        let req = {
+          method: 'GET',
+          headers: headers,
+          mode: 'cors'
+        };
+
+        fetch(url, req)
+            .then(response =>{ response.json()
+                .then( data => showPosts(data))
+            })
+          .catch(error => {
             console.log("error", error);
-        });
+          });
     }
 
     function showPosts(response) {
-        console.log("response", response);
+        console.log("response", response)
     }
 </script>
 
